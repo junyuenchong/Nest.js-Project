@@ -57,22 +57,6 @@ CSRF_SECRET=your_secure_secret
 FRONTEND_URL=http://localhost:5173
 NODE_ENV=development
 ```
-
-## Project Structure
-```
-backend/
-├── src/
-│   ├── auth/      # Auth logic
-│   ├── posts/     # Blog posts
-│   ├── tags/      # Tags
-│   ├── users/     # Users & profiles
-│   ├── database/  # Migrations
-│   ├── middleware/# Middleware
-│   └── config/    # Config files
-├── package.json
-└── README.md
-```
-
 ## Scripts
 - `npm run start:dev` – Start dev server
 - `npm run build` – Build for production
