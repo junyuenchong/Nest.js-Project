@@ -20,7 +20,6 @@ A modern React app for blog management with secure authentication and real-time 
 ### Installation
 ```bash
 npm install
-cp env.example .env
 npm run dev
 ```
 
