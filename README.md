@@ -62,15 +62,19 @@ npm install
 npm run migration:run
 npm run start:dev
 ```
+### 3. Import Database Schema (Optional)
 
-### 3. Setup Frontend
+To quickly set up your MySQL database, you can import the prebuilt SQL schema files located in the `schema` directory. This will create all necessary tables and relationships for the application.
+
+### 4. Setup Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-### 4. Access the Application
+
+### 5. Access the Application
 - Frontend: http://localhost:5173
 - Backend GraphQL: http://localhost:3000/graphql
 
