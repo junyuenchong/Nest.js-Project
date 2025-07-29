@@ -1,0 +1,118 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserProfile {
+  id: Int!
+  bio: String
+  user: User
+}
+
+type Tag {
+  id: Int!
+  name: String!
+}
+
+type Post {
+  id: Int!
+  title: String!
+  content: String!
+  author: User!
+  tags: [Tag!]!
+}
+
+type User {
+  id: Int!
+  username: String
+  email: String
+  password: String
+  posts: [Post!]
+  profile: UserProfile
+  bio: String
+}
+
+type LoginResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
+type RefreshResponse {
+  accessToken: String!
+}
+
+type CsrfResponse {
+  csrfToken: String!
+}
+
+type Query {
+  getUser(id: Int!): User
+  getPosts: [Post!]!
+  myPosts: [Post!]!
+  getTags: [Tag!]!
+  tags: [Tag!]!
+  getCsrfToken: CsrfResponse!
+  profile: User!
+}
+
+type Mutation {
+  updateUser(input: UpdateUserInput!): User!
+  deleteUser(id: Int!): Boolean!
+  createPost(input: CreatePostInput!): Post!
+  updatePost(input: UpdatePostInput!): Post!
+  deletePost(id: Int!): Boolean!
+  createTag(input: CreateTagInput!): Tag!
+  updateTag(input: UpdateTagInput!): Tag!
+  deleteTag(id: Int!): Boolean!
+  register(input: RegisterInput!): User!
+  login(input: LoginInput!): LoginResponse!
+  refreshToken: RefreshResponse!
+  logout: Boolean!
+  updateProfile(input: UpdateProfileInput!): User!
+}
+
+input UpdateUserInput {
+  id: Int!
+  username: String
+  password: String
+}
+
+input CreatePostInput {
+  title: String!
+  content: String!
+  tagIds: [Int!]!
+}
+
+input UpdatePostInput {
+  id: Int!
+  title: String
+  content: String
+  tagIds: [Int!]
+}
+
+input CreateTagInput {
+  name: String!
+}
+
+input UpdateTagInput {
+  id: Int!
+  name: String!
+}
+
+input RegisterInput {
+  email: String!
+  username: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input UpdateProfileInput {
+  username: String
+  email: String
+  password: String
+  bio: String
+}
