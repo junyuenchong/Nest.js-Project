@@ -44,33 +44,7 @@ A full-stack blog management application built with **NestJS** (backend) and **R
 - **Tailwind CSS** - Utility-first CSS
 - **Vite** - Build tool
 
-## 📁 Project Structure
 
-```
-simple-blog-management/
-├── backend/                            # NestJS GraphQL API (Backend)
-│   ├── src/
-│   │   ├── auth/                       # Authentication logic (JWT, guards, strategies)
-│   │   ├── posts/                      # Blog post CRUD operations
-│   │   ├── tags/                       # Tag management modules
-│   │   ├── users/                      # User profiles and management
-│   │   ├── database/                   # Database entities & migrations
-│   │   └── config/                     # Environment & app configuration
-│   ├── package.json
-│   └── README.md
-│
-├── frontend/                           # React 19 + TypeScript (Frontend)
-│   ├── src/
-│   │   ├── api/                        # Apollo GraphQL client setup
-│   │   ├── components/                 # Reusable React components
-│   │   ├── pages/                      # Page-level components (routes)
-│   │   ├── validators/                 # Zod validation schemas
-│   │   └── utils/                      # Utility/helper functions
-│   ├── public/                         # Static assets (favicon, index.html)
-│   ├── package.json
-│   └── README.md
-│
-└── docs/                               # Project documentation (optional)
 ```
 
 ## 🚀 Quick Start
