@@ -116,8 +116,8 @@
 
     2. **Configure environment**
       - Copy the example environment file:
-        ```bash
-        cp .env.example .env
+        ```Copy
+        cp update-env.ps1 in the simple-blog-management project
         ```
       - Open `.env` in your editor and fill in your database and secret keys:
         - `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, `DB_DATABASE`
