@@ -47,16 +47,6 @@ VITE_NODE_ENV=development
 
 ## Project Structure
 ```
-frontend/
-├── src/
-│   ├── api/         # GraphQL client & API functions
-│   ├── components/  # React components
-│   ├── validators/  # Zod schemas
-│   └── utils/       # Utilities
-├── public/          # Static assets
-└── package.json
-```
-
 ## Scripts
 - `npm run dev` – Start dev server
 - `npm run build` – Build for production
