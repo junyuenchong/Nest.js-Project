@@ -27,7 +27,6 @@ A secure NestJS GraphQL API for blog management, with JWT authentication, CSRF p
 ### Installation
 ```bash
 npm install
-cp env.example .env
 ```
 
 ### Database Setup
