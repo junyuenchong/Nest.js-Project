@@ -39,6 +39,8 @@ VITE_NODE_ENV=development
 3. Open [http://localhost:5173](http://localhost:5173)
 4. Register or log in, then manage posts and tags
 ```
+
+
 ## Scripts
 - `npm run dev` – Start dev server
 - `npm run build` – Build for production
