@@ -48,7 +48,7 @@ Example `.env`:
 ```env
 DB_HOST=localhost
 DB_PORT=3306
-DB_USERNAME=root
+DB_USERNAME=your_username
 DB_PASSWORD=your_password
 DB_DATABASE=BLOG
 JWT_ACCESS_SECRET=your_secure_secret
