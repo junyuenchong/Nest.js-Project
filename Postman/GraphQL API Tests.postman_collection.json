@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "c5bb21aa-18f7-4fd9-9912-cfb457e1fb43",
+		"name": "GraphQL API Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46027723",
+		"_collection_link": "https://junyuen.postman.co/workspace/junyuen's-Workspace~90674bb3-0c7a-4329-8c95-33f2a9c125ac/collection/46027723-c5bb21aa-18f7-4fd9-9912-cfb457e1fb43?action=share&source=collection_link&creator=46027723"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJzdWIiOjQsImlhdCI6MTc1MzM3MjIxOSwiZXhwIjoxNzUzNDU4NjE5fQ.hq9CTgRi5_TGAF2P6CipjQJRP8XHfS1fNBMYptAHlEQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation Login($email: String!, $password: String!) {\r\n  login(input: { email: $email, password: $password }) {\r\n    accessToken\r\n    refreshToken\r\n    user {\r\n      id\r\n      email\r\n    }\r\n  }\r\n}\r\n",
+								"variables": "{\r\n  \"email\": \"testuser2@example.com\",\r\n  \"password\": \"@StrongPass1234\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetProfile {\r\n  profile {\r\n    id\r\n    username\r\n    email\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJzdWIiOjQsImlhdCI6MTc1MzM3MjIxOSwiZXhwIjoxNzUzNDU4NjE5fQ.hq9CTgRi5_TGAF2P6CipjQJRP8XHfS1fNBMYptAHlEQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateUser($input: UpdateUserInput!) {\r\n  updateUser(input: $input) {\r\n    id\r\n    username\r\n  }\r\n}",
+								"variables": "{\r\n  \"input\": {\r\n    \"id\": 4,\r\n    \"username\": \"test123@example.com\",\r\n    \"password\": \"@Cjy416716\"\r\n  }\r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tags",
+			"item": [
+				{
+					"name": "Create Tags",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tags",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tags",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tags",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Create Posts",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Update Posts",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Posts",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Posts",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
