@@ -67,7 +67,7 @@ backend/
 │   ├── tags/      # Tags
 │   ├── users/     # Users & profiles
 │   ├── database/  # Migrations
-│   ├── middleware/  # middleware
+│   ├── middleware/# Middleware
 │   └── config/    # Config files
 ├── package.json
 └── README.md
