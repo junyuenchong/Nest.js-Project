@@ -42,12 +42,6 @@ A full-stack blog management application built with **NestJS** (backend) and **R
 - Tailwind CSS
 - Vite
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ce7e1ad (UpdateNewV)
-```
-
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -115,6 +109,28 @@ VITE_NODE_ENV=development
 - Input validation with class-validator and Zod
 - CORS configuration for cross-origin requests
 - Environment variable management for secrets
+
+## 🛡️ What are XSS and CSRF? How Do We Prevent Them?
+
+### What is XSS (Cross-Site Scripting)?
+- XSS is an attack where malicious scripts are injected into trusted web pages.
+- Attackers use XSS to steal cookies, session tokens, or run unwanted actions as the user.
+
+**How we prevent XSS:**
+- All user input is validated and sanitized before saving to the database.
+- Sensitive cookies use `httpOnly` and `SameSite=strict` so JavaScript cannot access them.
+- The frontend (React) escapes all content by default, preventing script injection.
+- Never use `dangerouslySetInnerHTML` unless absolutely necessary and always sanitize content.
+
+### What is CSRF (Cross-Site Request Forgery)?
+- CSRF tricks a logged-in user’s browser into sending unwanted requests to a web application.
+- This can result in actions being performed as the user without their consent.
+
+**How we prevent CSRF:**
+- All sensitive mutations require a valid CSRF token, which is checked by backend middleware.
+- CSRF tokens are stored in secure cookies and sent in request headers.
+- The backend uses `SameSite=strict` cookies and validates CSRF tokens on every mutation.
+- The frontend automatically includes CSRF tokens in requests.
 
 ## 📊 Database Schema
 
