@@ -17,11 +17,6 @@ A modern React app for blog management with secure authentication and real-time 
 - Vite (build tool)
 
 ## Getting Started
-
-### Prerequisites
-- Node.js 18+
-- Backend server running (see backend README)
-
 ### Installation
 ```bash
 npm install
