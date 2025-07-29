@@ -2,7 +2,7 @@
 
 A secure NestJS GraphQL API for blog management, with JWT authentication, CSRF protection, and MySQL database.
 
-## Features
+## Project Overview
 - GraphQL API (Apollo Server)
 - JWT authentication (httpOnly cookies)
 - CSRF protection
@@ -11,42 +11,24 @@ A secure NestJS GraphQL API for blog management, with JWT authentication, CSRF p
 - User, post, and tag management
 - Database migrations
 
-## Tech Stack
-- NestJS
-- GraphQL
-- TypeORM (MySQL)
-- JWT, bcrypt
-- class-validator
-
-## Getting Started
+## Setup Instructions
 
 ### Prerequisites
 - Node.js 18+
 - MySQL 8.0+
 
 ### Installation
-<<<<<<< HEAD
 ```bash
 npm install
-=======
-      ```bash
-      npm install
 cp env.example .env
->>>>>>> ce7e1ad (UpdateNewV)
 ```
 
 ### Database Setup
 1. Edit `.env` with your MySQL credentials.
 2. Run migrations:
-      ```bash
-      npm run migration:run
-      ```
-
-### Start Server
-      ```bash
-      npm run start:dev
-      ```
-- GraphQL Playground: [http://localhost:3000/graphql](http://localhost:3000/graphql)
+   ```bash
+   npm run migration:run
+   ```
 
 ## Environment Variables
 Example `.env`:
@@ -62,41 +44,164 @@ CSRF_SECRET=your_secure_secret
 FRONTEND_URL=http://localhost:5173
 NODE_ENV=development
 ```
+
 ## Scripts
 - `npm run start:dev` – Start dev server
 - `npm run build` – Build for production
 - `npm run migration:run` – Run DB migrations
 - `npm run test` – Run tests
 
-## API Usage
-- All endpoints are available via GraphQL at `/graphql`.
-- Use the Playground to explore queries and mutations.
+## How to Run the API Locally
 
-### Example Queries
-    ```graphql
-# Register
-mutation { register(input: { username: "user", email: "a@b.com", password: "pass" }) { id } }
+- **Development mode:**
+  ```bash
+  npm run start:dev
+  ```
+- **Production mode:**
+  ```bash
+  npm run build
+  npm run start:prod
+  ```
+- **API Playground:**
+  - Open [http://localhost:3000/graphql](http://localhost:3000/graphql) in your browser.
 
-# Login
-mutation { login(input: { email: "a@b.com", password: "pass" }) { accessToken user { id } } }
+## 📋 Sample GraphQL Queries & Mutations
 
-# Get Profile
-query { profile { id username email bio } }
+### Register User
+```graphql
+mutation {
+  register(input: { username: "alice", email: "alice@email.com", password: "Password123!" }) {
+    id
+    username
+    email
+  }
+}
+```
 
-# Create Post
-mutation { createPost(input: { title: "Title", content: "Content", tagIds: [] }) { id title } }
-    ```
+### Login
+```graphql
+mutation {
+  login(input: { email: "alice@email.com", password: "Password123!" }) {
+    accessToken
+    user {
+      id
+      username
+      email
+    }
+  }
+}
+```
 
-## Security
-- JWT tokens in httpOnly cookies
-- CSRF token validation
-- Passwords hashed with bcrypt
-- Input validation with class-validator
+### Get Profile
+```graphql
+query {
+  profile {
+    id
+    username
+    email
+    bio
+  }
+}
+```
 
-## Contributing
-- Use TypeScript best practices
-- Keep validation and security in mind
-- Write clear, concise code and comments
+### Update Profile (with bio)
+```graphql
+mutation {
+  updateProfile(input: { bio: "I love blogging!" }) {
+    id
+    username
+    email
+    bio
+  }
+}
+```
+
+### Create Post
+```graphql
+mutation {
+  createPost(input: { title: "My First Post", content: "Hello world!", tagIds: [1,2] }) {
+    id
+    title
+    content
+    tags { id name }
+  }
+}
+```
+
+### Get All Posts
+```graphql
+query {
+  posts {
+    id
+    title
+    content
+    author { username }
+    tags { name }
+  }
+}
+```
+
+### Create Tag
+```graphql
+mutation {
+  createTag(input: { name: "Tech" }) {
+    id
+    name
+  }
+}
+```
+
+### Get All Tags
+```graphql
+query {
+  tags {
+    id
+    name
+  }
+}
+```
+
+## Known Issues & Challenges
+
+- **Switching from REST to GraphQL:**
+  - *Challenge:* Adapting to GraphQL's single endpoint and query structure.
+  - *Solution:* Used GraphQL Playground, tutorials, and best practices for resolver and CQRS structure.
+
+- **JWT Token Management:**
+  - *Challenge:* Handling both access and refresh tokens securely.
+  - *Solution:* Used separate secrets, HTTP-only cookies, and automatic token refresh.
+
+- **CSRF Protection:**
+  - *Challenge:* Implementing CSRF in GraphQL.
+  - *Solution:* Token-based CSRF protection and middleware to validate tokens.
+
+- **Cookie Security:**
+  - *Challenge:* Secure cookies for both dev and prod.
+  - *Solution:* Used environment-based settings, SameSite, Secure flags, and domain restrictions.
+
+- **TypeORM Relationships:**
+  - *Challenge:* Many-to-many setup for posts and tags, and one-to-one for user profiles.
+  - *Solution:* Used join tables, cascade options, and string-based references to avoid circular dependencies.
+
+- **User Profile Implementation:**
+  - *Challenge:* Implementing one-to-one relationship between User and UserProfile.
+  - *Solution:* Created separate UserProfile entity with bio field, automatic profile creation during registration, and proper relationship loading.
+
+- **Environment Variables:**
+  - *Challenge:* Managing secrets and config for different environments.
+  - *Solution:* `.env` file with unique secrets for each component.
+
+- **Authentication Guard Integration:**
+  - *Challenge:* JWT with GraphQL guards.
+  - *Solution:* Custom GqlAuthGuard and CurrentUser decorator.
+
+- **CORS Configuration:**
+  - *Challenge:* Allowing frontend communication securely.
+  - *Solution:* Configured allowed origins and credentials in CORS settings.
+
+- **Migration Generation Issues:**
+  - *Challenge:* Circular dependency errors during TypeORM migration generation.
+  - *Solution:* Used string-based entity references and manually created migrations when needed.
 
 ---
 
