@@ -25,21 +25,27 @@ A secure NestJS GraphQL API for blog management, with JWT authentication, CSRF p
 - MySQL 8.0+
 
 ### Installation
+<<<<<<< HEAD
 ```bash
 npm install
+=======
+      ```bash
+      npm install
+cp env.example .env
+>>>>>>> ce7e1ad (UpdateNewV)
 ```
 
 ### Database Setup
 1. Edit `.env` with your MySQL credentials.
 2. Run migrations:
-   ```bash
-   npm run migration:run
-   ```
+      ```bash
+      npm run migration:run
+      ```
 
 ### Start Server
-```bash
-npm run start:dev
-```
+      ```bash
+      npm run start:dev
+      ```
 - GraphQL Playground: [http://localhost:3000/graphql](http://localhost:3000/graphql)
 
 ## Environment Variables
@@ -67,7 +73,7 @@ NODE_ENV=development
 - Use the Playground to explore queries and mutations.
 
 ### Example Queries
-```graphql
+    ```graphql
 # Register
 mutation { register(input: { username: "user", email: "a@b.com", password: "pass" }) { id } }
 
@@ -79,7 +85,7 @@ query { profile { id username email bio } }
 
 # Create Post
 mutation { createPost(input: { title: "Title", content: "Content", tagIds: [] }) { id title } }
-```
+    ```
 
 ## Security
 - JWT tokens in httpOnly cookies

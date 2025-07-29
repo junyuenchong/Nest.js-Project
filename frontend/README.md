@@ -17,6 +17,14 @@ A modern React app for blog management with secure authentication and real-time 
 - Vite (build tool)
 
 ## Getting Started
+<<<<<<< HEAD
+=======
+
+### Prerequisites
+- Node.js 18+ 
+- Backend server running (see backend README)
+
+>>>>>>> ce7e1ad (UpdateNewV)
 ### Installation
 ```bash
 npm install
@@ -33,9 +41,9 @@ VITE_NODE_ENV=development
 ## Usage
 1. Start the backend server (see backend/README.md)
 2. Start the frontend:
-   ```bash
-   npm run dev
-   ```
+```bash
+npm run dev
+```
 3. Open [http://localhost:5173](http://localhost:5173)
 4. Register or log in, then manage posts and tags
 
