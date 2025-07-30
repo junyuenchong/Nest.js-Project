@@ -107,6 +107,27 @@ VITE_API_URL=http://localhost:3000/graphql
 VITE_NODE_ENV=development
 ```
 
+## 🔧 Environment Settings: Development vs Production
+
+### Backend Environment Variables
+| Setting | Development | Production | Purpose |
+|---------|-------------|------------|---------|
+| `NODE_ENV` | `development` | `production` | Controls logging, error handling, and security settings |
+| `FRONTEND_URL` | `http://localhost:5173` | `https://yourdomain.com` | CORS origin for frontend communication |
+| Cookie settings | `secure: false` | `secure: true` | HTTPS requirement for production |
+| Logging | Verbose | Minimal | Performance and security |
+
+### Frontend Environment Variables
+| Setting | Development | Production | Purpose |
+|---------|-------------|------------|---------|
+| `VITE_NODE_ENV` | `development` | `production` | Controls build optimization and debugging |
+| `VITE_API_URL` | `http://localhost:3000/graphql` | `https://yourdomain.com/graphql` | Backend API endpoint |
+
+### Where to Change Settings
+- **Backend:** Update `backend/.env` file
+- **Frontend:** Update `frontend/.env` file
+- **Production:** Use environment variables on your hosting platform (Vercel, Heroku, etc.)
+
 ## 🔐 Security Features
 - JWT authentication with httpOnly cookies
 - CSRF protection for all mutations
