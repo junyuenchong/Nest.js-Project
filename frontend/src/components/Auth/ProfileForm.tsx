@@ -28,7 +28,7 @@ const UPDATE_PROFILE_MUTATION = gql`
   }
 `;
 
-export default function ProfileForm({ token }: { token: string }) {
+export default function ProfileForm() {
   const [form, setForm] = useState<ProfileFormState>({
     username: '',
     email: '',
@@ -43,7 +43,6 @@ export default function ProfileForm({ token }: { token: string }) {
 
   // Apollo: Fetch profile
   const { data, loading: isLoading, error, refetch } = useQuery<{ profile: Profile }>(PROFILE_QUERY, {
-    context: { headers: { Authorization: `Bearer ${token}` } },
     fetchPolicy: 'network-only',
   });
 
@@ -75,7 +74,6 @@ export default function ProfileForm({ token }: { token: string }) {
   const [updateProfile, { error: mutationError, reset: resetMutation }] = useMutation(
     UPDATE_PROFILE_MUTATION,
     {
-      context: { headers: { Authorization: `Bearer ${token}` } },
       onCompleted: () => {
         setMessage('Profile updated successfully!');
         setForm((prev) => ({ ...prev, password: '', confirmPassword: '' }));

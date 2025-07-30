@@ -14,7 +14,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [showRegister, setShowRegister] = useState(false);
   const [activeTab, setActiveTab] = useState('posts');
-  const [token, setToken] = useState<string | null>(() => localStorage.getItem('jwtToken'));
 
   // Check if user is logged in on app start
   useEffect(() => {
@@ -26,7 +25,11 @@ function App() {
     const checkAuthStatus = async () => {
       try {
         const profile = await getProfile();
-        if (profile) setIsAuthenticated(true);
+        // If user is already logged in, set authenticated and show profile tab
+        if (profile) {
+          setIsAuthenticated(true);
+          setActiveTab('profile');
+        }
       } catch (error: any) {
         // Not logged in
         setIsAuthenticated(false);
@@ -39,18 +42,11 @@ function App() {
     checkAuthStatus();
   }, []); 
 
-  // If user is already authenticated, ensure they stay on posts page
-  useEffect(() => {
-    if (isAuthenticated) {
-      setActiveTab('posts');
-    }
-  }, [isAuthenticated]);
-
   // Handle successful login
   const handleLogin = () => {
     setIsAuthenticated(true);
     setShowRegister(false);
-    setActiveTab('posts'); // Automatically go to posts page after login
+    setActiveTab('profile'); // Automatically go to posts page after login
   };
 
   // Handle successful registration
@@ -63,11 +59,9 @@ function App() {
     try {
       await logout();
       setIsAuthenticated(false);
-      setToken(null);
       setActiveTab('posts');
     } catch (error) {
       setIsAuthenticated(false);
-    setToken(null);
       setActiveTab('posts');
     }
   };
@@ -122,9 +116,9 @@ function App() {
         {activeTab === 'tags' && (
           <TagsPage isAuthenticated={isAuthenticated} />
         )}
-        {activeTab === 'profile' && token && (
+        {activeTab === 'profile' && isAuthenticated && (
           <div className="max-w-lg mx-auto">
-            <ProfileForm token={token} />
+            <ProfileForm />
           </div>
         )}
       </main>
