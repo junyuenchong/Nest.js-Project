@@ -2,17 +2,31 @@
 
 This directory contains all database migrations and configuration files for the backend.
 
-## Contents
+---
 
+## Contents
 - **migrations/**: TypeORM migration files
 - **data-source.ts**: TypeORM CLI configuration (connection, entities, migrations)
 - **ormconfig.json**: Alternative CLI config (optional)
 
+---
+
 ## Migration Management
 
-### Common Commands
+### NPM Scripts (Recommended)
 
-**Using NPM scripts (recommended):**
+**Before running migration commands, ensure the following script is set up in your `backend/package.json`:**
+
+```json
+"scripts": {
+  // ... other scripts ...
+  "migration:run": "ts-node -r tsconfig-paths/register ./src/database/migrations/data-source.ts migration:run"
+}
+```
+
+- Add this inside the `scripts` section of your `backend/package.json` file.
+
+**Common Commands:**
 - Run all migrations:
   ```bash
   npm run migration:run
@@ -26,7 +40,7 @@ This directory contains all database migrations and configuration files for the 
   npm run migration:show
   ```
 
-**Using TypeORM CLI directly:**
+### Using TypeORM CLI Directly
 - Generate a new migration:
   ```bash
   npx ts-node ./node_modules/typeorm/cli.js migration:generate src/database/migrations/YourMigrationName -d src/database/migrations/data-source.ts
@@ -44,8 +58,9 @@ This directory contains all database migrations and configuration files for the 
   npx ts-node ./node_modules/typeorm/cli.js migration:revert -d src/database/migrations/data-source.ts
   ```
 
-## Migration Overview
+---
 
+## Migration Overview
 - **1753720126276-InitSchema.ts**: Creates initial tables (`users`, `posts`, `tags`, `post_tags`) with foreign keys and unique constraints.
 - **1753720126277-AddUserProfile.ts**: Adds `user_profiles` table (with `bio` field) and sets up a one-to-one relationship with `users`.
 
@@ -53,16 +68,18 @@ This directory contains all database migrations and configuration files for the 
 ✅ All migrations applied.  
 ✅ Database schema is current.
 
-## Database Tables
+---
 
+## Database Tables
 - `users`: User accounts
 - `user_profiles`: User profile information (bio)
 - `posts`: Blog posts
 - `tags`: Unique post tags
 - `post_tags`: Many-to-many relationship between posts and tags
 
-## Entity Relationship Diagram (ERD)
+---
 
+## Entity Relationship Diagram (ERD)
 ```mermaid
 erDiagram
   USERS {
@@ -102,4 +119,3 @@ erDiagram
 ---
 
 For more details, see the main backend README.
-# End of Selection

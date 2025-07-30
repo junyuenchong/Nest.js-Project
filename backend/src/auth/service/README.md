@@ -1,82 +1,68 @@
 # Auth Service
 
-## `auth.service.ts`
+## Overview
+Handles all authentication logic: user validation, password hashing, JWT token management, and user profile operations.
 
-**Function**: Core authentication logic for user validation, password hashing, JWT token management, and user profile operations
+---
 
-### Main Features:
+## Main Features
 
-#### User Authentication
-- **`validateUser()`** - Check email/password and return user if valid
-- **`hashPassword()`** - Hash passwords with bcrypt (salt rounds: 10)
+### User Authentication
+- **validateUser(email, password):** Check credentials and return user if valid
+- **hashPassword(password):** Hash passwords securely with bcrypt
 
-#### JWT Token Management
-- **`issueAccessToken()`** - Create short-lived access tokens (15min)
-- **`issueRefreshToken()`** - Create long-lived refresh tokens (7 days)
-- **`refreshAccessToken()`** - Generate new access token using refresh token
-- **`verifyAccessToken()`** - Validate and decode access tokens
+### JWT Token Management
+- **issueAccessToken(user):** Create short-lived access tokens (default: 15 min)
+- **issueRefreshToken(user):** Create long-lived refresh tokens (default: 7 days)
+- **refreshAccessToken(refreshToken):** Generate new access token using a valid refresh token
+- **verifyAccessToken(token):** Validate and decode access tokens
 
-#### User Profile Management
-- **`updateProfile()`** - Update user profile including bio information
-- **`getUserWithProfile()`** - Load user with profile relationship for bio access
-- **`createUserProfile()`** - Create UserProfile entry for new users
+### User Profile Management
+- **updateProfile(userId, input):** Update user profile (e.g., bio)
+- **getUserWithProfile(userId):** Load user with profile relationship
+- **createUserProfile(user):** Create UserProfile for new users
 
-### Where AuthService is Used:
+---
 
-#### 1. Auth Resolver (`auth.resolver.ts`)
-```typescript
-// Refresh access tokens
-const newAccessToken = await this.authService.refreshAccessToken(refreshToken);
+## Where AuthService is Used
 
-// Update user profile with bio
-const updatedUser = await this.authService.updateProfile(userId, input);
+- **Auth Resolver (`auth.resolver.ts`):**
+  - Refresh tokens, update profile, get user with profile
+- **Register Handler (`commands/register.handler.ts`):**
+  - Hash password, create user profile
+- **Login Handler (`commands/login.handler.ts`):**
+  - Validate credentials, issue tokens
+- **Auth Module (`auth.module.ts`):**
+  - Registered as a provider and injected with repositories
 
-// Get user with profile loaded
-const userWithProfile = await this.authService.getUserWithProfile(userId);
-```
+---
 
-#### 2. Register Handler (`commands/register.handler.ts`)
-```typescript
-// Hash user passwords during registration
-const hashedPassword = await this.authService.hashPassword(password);
+## Security Highlights
+- Passwords hashed with bcrypt (salt rounds: 10)
+- Separate access and refresh token validation
+- Token expiration configurable in security config
+- Unauthorized exceptions for invalid credentials or tokens
+- Only authenticated users can update their own profile
 
-// Create user profile automatically
-const userProfile = this.userProfileRepository.create({
-  user: user,
-  bio: undefined, // Default empty bio
-});
-```
+---
 
-#### 3. Login Handler (`commands/login.handler.ts`)
-```typescript
-// Validate user credentials
-const user = await this.authService.validateUser(email, password);
+## Profile Management
+- Users can set and update their bio (0-500 characters)
+- UserProfile automatically created during registration
+- Proper loading of UserProfile relationships
 
-// Issue JWT tokens
-const accessToken = await this.authService.issueAccessToken(user);
-const refreshToken = await this.authService.issueRefreshToken(user);
-```
+---
 
-#### 4. Auth Module (`auth.module.ts`)
-- Registered as provider in AuthModule
-- Injected with UserProfile repository for bio operations
+## Token Flow
+1. **Register:** Password hashed, UserProfile created
+2. **Login:** Credentials validated, tokens issued
+3. **Access token expires:** Refresh token used to get new access token
+4. **Invalid tokens:** Proper error responses
+5. **Profile updates:** Bio saved to UserProfile table
 
-### Security Features:
-- **Password Hashing**: bcrypt with salt rounds
-- **Token Types**: Separate access/refresh token validation
-- **Token Expiration**: Configurable via security config
-- **Error Handling**: Proper unauthorized exceptions
-- **Profile Security**: Only authenticated users can update their own profile
+---
 
-### Profile Management Features:
-- **Bio Updates**: Users can set and update their bio
-- **Automatic Profile Creation**: UserProfile created during registration
-- **Relationship Loading**: Proper loading of UserProfile relationships
-- **Data Validation**: Bio length validation (0-500 characters)
-
-### Token Flow:
-1. User registers → password hashed → UserProfile created
-2. User logs in → credentials validated → tokens issued
-3. Access token expires → refresh token used → new access token
-4. Invalid tokens → proper error responses
-5. Profile updates → bio saved to UserProfile table 
+**Tip:**
+- Keep JWT secrets secure and unique per environment
+- Use string-based entity references in TypeORM to avoid circular dependencies
+- For silent refresh, ensure the frontend handles token refresh automatically on authentication errors 

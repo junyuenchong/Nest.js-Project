@@ -37,6 +37,10 @@ A secure NestJS GraphQL API for blog management, with JWT authentication, CSRF p
    - In your `.env` file, set `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, and `DB_DATABASE` to match your MySQL setup.
 
 2. **Run database migrations:**
+   > **Note:** Make sure the `migration:run` script is present in the `scripts` section of your `backend/package.json` file. If not, add:
+   > ```json
+   > "migration:run": "ts-node -r tsconfig-paths/register ./src/database/migrations/data-source.ts migration:run"
+   > ```
    ```bash
    npm run migration:run
    ```

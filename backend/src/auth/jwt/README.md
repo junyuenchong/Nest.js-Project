@@ -1,23 +1,25 @@
 # JWT Authentication
 
-## Files Overview
+## File Overview
 
 ### `jwt.strategy.ts`
-**Function**: Validates JWT tokens and loads user data
-- Checks if token is valid (not expired)
-- Extracts user ID from token
-- Finds user in database
+- **Purpose:** Validates JWT tokens and loads user data for authentication
+- Checks if token is valid and not expired
+- Extracts user ID from token payload
+- Finds user in the database
 - Returns user object for authenticated requests
-
-**Token Sources**:
-- HTTP cookies (primary)
-- Authorization header (fallback)
+- **Token sources:**
+  - HTTP cookies (primary)
+  - Authorization header (fallback)
 
 ### `gql-auth.guard.ts`
-**Function**: Protects GraphQL endpoints
-- Extracts request from GraphQL context
+- **Purpose:** Enables JWT authentication for GraphQL resolvers
+- Extracts HTTP request from GraphQL context for JWT validation
 - Uses JWT strategy to validate authentication
 - Blocks unauthorized access to protected resolvers
+- **Short comment example:**
+  - `// Enables JWT auth for GraphQL resolvers`
+  - `// Extract HTTP request for JWT validation`
 
 ## Where JWT Strategy is Used
 
@@ -37,8 +39,15 @@ import { JwtStrategy } from './jwt/jwt.strategy';
 - Tag management
 - User management
 
-## Flow
-1. Client sends request with JWT token
-2. `GqlAuthGuard` extracts request from GraphQL context
+## Authentication Flow
+1. Client sends request with JWT token (in cookie or Authorization header)
+2. `GqlAuthGuard` extracts HTTP request from GraphQL context
 3. `JwtStrategy` validates token and loads user
-4. If valid, request proceeds; if not, access denied 
+4. If valid, request proceeds; if not, access denied
+
+---
+
+**Tip:**
+- Use string-based entity references in TypeORM to avoid circular dependencies.
+- Always keep your JWT secrets secure and unique per environment.
+- For silent refresh, ensure your frontend handles token refresh automatically on authentication errors. 
