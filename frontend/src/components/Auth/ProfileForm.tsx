@@ -1,32 +1,11 @@
 import React, { useState } from 'react';
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+import { PROFILE_QUERY, UPDATE_PROFILE_MUTATION } from '../../api/auth';
 import { useFormValidation } from '../../validators/hooks/useFormValidation';
 import { profileUpdateSchema } from '../../validators/auth.validator';
 
 type Profile = { id: number; username: string; email: string; bio?: string };
 type ProfileFormState = { username: string; email: string; password: string; confirmPassword: string; bio: string };
-
-const PROFILE_QUERY = gql`
-  query Profile {
-    profile {
-      id
-      username
-      email
-      bio
-    }
-  }
-`;
-
-const UPDATE_PROFILE_MUTATION = gql`
-  mutation UpdateProfile($username: String, $password: String, $bio: String) {
-    updateProfile(input: { username: $username, password: $password, bio: $bio }) {
-      id
-      username
-      email
-      bio
-    }
-  }
-`;
 
 export default function ProfileForm() {
   const [form, setForm] = useState<ProfileFormState>({

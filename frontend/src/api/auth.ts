@@ -40,7 +40,7 @@ export const PROFILE_QUERY = gql`
   }
 `;
 
-const UPDATE_PROFILE_MUTATION = gql`
+export const UPDATE_PROFILE_MUTATION = gql`
   mutation UpdateProfile($input: UpdateProfileInput!) {
     updateProfile(input: $input) {
       id
