@@ -11,6 +11,13 @@ A modern React app for blog management with secure authentication, real-time dat
 - User profile management (with biography)
 - Blog post and tag management
 
+## Security Features
+- **JWT Authentication:** Secure token management with httpOnly cookies and automatic silent refresh
+- **CSRF Protection:** Automatic CSRF token inclusion in GraphQL mutations
+- **Form Validation:** Client-side validation with Zod schemas matching backend rules
+- **Secure Communication:** All requests use `credentials: 'include'` for cookie transmission
+- **Type Safety:** TypeScript ensures type-safe API calls and data handling
+
 ## Setup Instructions
 
 ### Prerequisites
@@ -46,8 +53,8 @@ VITE_NODE_ENV=development
   - *Solution:* Refactored all data fetching to use Apollo hooks and GraphQL queries/mutations.
 
 - **JWT Token Management:**
-  - *Challenge:* Securely handling authentication tokens in the frontend.
-  - *Solution:* All tokens are managed as httpOnly cookies by the backend; frontend uses `credentials: 'include'`.
+  - *Challenge:* Securely handling authentication tokens in the frontend and keeping users logged in without interruptions.
+  - *Solution:* All tokens are managed as httpOnly cookies by the backend; the frontend uses `credentials: 'include'` for all requests and implements silent token refresh (automatically renews access tokens when expired) for a seamless user experience.
 
 - **CSRF Protection:**
   - *Challenge:* Implementing CSRF protection with GraphQL mutations.

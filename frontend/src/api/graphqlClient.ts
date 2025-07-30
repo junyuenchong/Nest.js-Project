@@ -19,8 +19,9 @@ const authLink = setContext((_, { headers }) => {
   }
 });
 
-// Refresh the access token if expired
+// Silent refresh token function
 const refreshToken = async () => {
+  // This function performs a silent refresh of the access token using the refreshToken mutation
   try {
     const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/graphql'}`, {
       method: 'POST',
