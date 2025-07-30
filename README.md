@@ -28,11 +28,12 @@ A full-stack blog management application built with **NestJS** (backend) and **R
 ## 🛠️ Tech Stack
 
 ### Backend
-- NestJS
-- GraphQL
-- TypeORM (MySQL)
-- JWT, bcrypt
+- NestJS (latest)
+- Apollo Server (GraphQL)
+- TypeORM (MySQL 8+)
+- JWT (httpOnly cookies), bcrypt
 - class-validator
+- CQRS pattern
 
 ### Frontend
 - React 19
