@@ -137,42 +137,11 @@ VITE_NODE_ENV=development
 - The backend uses `SameSite=strict` cookies and validates CSRF tokens on every mutation.
 - The frontend automatically includes CSRF tokens in requests.
 
-## 📊 Database Schema
-
-### Users
-- `id` (Primary Key)
-- `username` (Unique)
-- `email` (Unique)
-- `password` (Hashed)
-- `profile` (One-to-One with UserProfile)
-
-### UserProfiles
-- `id` (Primary Key)
-- `bio` (Text, max 500 characters)
-- `user` (One-to-One with User)
-
-### Posts
-- `id` (Primary Key)
-- `title` (String)
-- `content` (Text)
-- `author` (Many-to-One with User)
-- `tags` (Many-to-Many with Tags)
-
-### Tags
-- `id` (Primary Key)
-- `name` (String, Unique)
-
+    
 ## 🎯 API Endpoints
 
 All endpoints are available via GraphQL at `/graphql`.
 Use the Playground to explore queries and mutations.
-
-## 🤝 Contributing
-- Use TypeScript best practices
-- Use Zod for validation
-- Keep UI responsive with Tailwind
-- Test authentication flows
-- Write clear, concise code and comments
 
 ---
 
