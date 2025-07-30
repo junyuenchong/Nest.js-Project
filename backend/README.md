@@ -18,18 +18,38 @@ A secure NestJS GraphQL API for blog management, with JWT authentication, CSRF p
 - MySQL 8.0+
 
 ### Installation
-```bash
-npm install
-cp env.example .env
-```
 
-### Database Setup
-1. Edit `.env` with your MySQL credentials.
-2. Run migrations:
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Set up environment variables:**
+   - Copy the example environment file:
+     ```bash
+     cp env.example .env
+     ```
+   - Open `.env` and fill in your configuration (see the "Environment Variables" section below for details).
+
+### Environment Setup
+
+1. **Configure MySQL connection:**
+   - In your `.env` file, set `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, and `DB_DATABASE` to match your MySQL setup.
+
+2. **Run database migrations:**
    ```bash
    npm run migration:run
    ```
-
+3. Generate a secure secret for JWT or CSRF in your terminal:
+   ```bash
+   openssl rand -base64 32
+   ```
+   Copy the generated string and use it for:
+   - `JWT_ACCESS_SECRET`
+   - `JWT_REFRESH_SECRET`
+   - `CSRF_SECRET`
+   in your `.env` file.
+   
 ## Environment Variables
 Example `.env`:
 ```env
